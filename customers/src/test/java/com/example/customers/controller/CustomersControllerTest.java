@@ -43,7 +43,7 @@ public class CustomersControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("Test customer found - GET /customers/1")
+    @DisplayName("Test customer found - GET /api/customers/1")
     public void testGetCustomerByIdFindsCustomer() throws Exception {
         // Prepare mock customer
         Customer mockProduct = new Customer(1,11, "John", "Smith", "johnsmith@gmail.com", "+4917589");
@@ -52,7 +52,7 @@ public class CustomersControllerTest {
         doReturn(mockProduct).when(customerService).findById(mockProduct.getId());
 
         // Perform GET request
-        mockMvc.perform(MockMvcRequestBuilders.get("/customers/{id}", 1))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/customers/{id}", 1))
                 // Validate 200 OK and JSON response type received
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -72,8 +72,8 @@ public class CustomersControllerTest {
 
 
     @Test
-    @DisplayName("Add a new customer - POST /customers")
-    public void testAddNewProduct() throws Exception {
+    @DisplayName("Add a new customer - POST /api/customers")
+    public void testAddNewCustomer() throws Exception {
         // Prepare mock customer
         Customer newCustomer = new Customer(12, "Jack", "Bower", "jackbower@gmail.com", "+497787979");
         Customer mockCustomer = new Customer(2,12, "Jack", "Bower", "jackbower@gmail.com", "+497787979");
@@ -82,7 +82,7 @@ public class CustomersControllerTest {
         doReturn(mockCustomer).when(customerService).save(ArgumentMatchers.any());
 
         // Perform POST request
-        mockMvc.perform(post("/customers")
+        mockMvc.perform(post("/api/customers")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(new ObjectMapper().writeValueAsString(newCustomer)))
 

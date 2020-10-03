@@ -24,7 +24,7 @@ public class CustomersRepositoryTests {
 
 	@BeforeEach
 	public void setup() throws IOException {
-		// Deserialize products from JSON file to Product array
+		// Deserialize products from JSON file to Customer array
 		Customer[] customers = new ObjectMapper().readValue(DATA_JSON, Customer[].class);
 
 		// Save each product to database
