@@ -43,8 +43,6 @@ public class LoanApplicationService {
 
 	public LoanApplicationsDto findCustomerById(Integer id) {
 		LOGGER.info("Finding loans by CustomerId:{}", id);
-//		Optional<Customer> customerOpt = Optional
-//				.ofNullable(new Customer(id, "John", "Smith", "johnsmith@gmail.com", "+4917589"));
 		Optional<Customer> customerOpt = findCustomer(id);
 		if (customerOpt.isPresent()) {
 			List<LoanApplication> loanApplications = loanApplicationRepository.findLoanApplicationsByCustomerId(id);

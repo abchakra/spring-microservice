@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/api/loanapplication/?customer=11"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "json/loanapplication-response-get-customer.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
