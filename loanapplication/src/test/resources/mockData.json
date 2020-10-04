@@ -1,0 +1,30 @@
+[
+	{
+		"id": 1,
+		"customerId": 11,
+		"amount": 1000,
+		"duration": 12,
+		"status": "APPLIED"
+	},
+	{
+		"id": 2,
+		"customerId": 11,
+		"amount": 2000,
+		"duration": 24,
+		"status": "DENIED"
+	},
+	{
+		"id": 3,
+		"customerId": 12,
+		"amount": 2000,
+		"duration": 24,
+		"status": "DENIED"
+	},
+	{
+		"id": 4,
+		"customerId": 13,
+		"amount": 2000,
+		"duration": 24,
+		"status": "DENIED"
+	}
+]

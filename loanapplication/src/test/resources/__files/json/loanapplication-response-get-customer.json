@@ -1,0 +1,33 @@
+{
+    "customer": {
+        "id": 11,
+        "firstName": "John",
+        "lastName": "Smith"
+    },
+    "loans": [
+        {
+            "id": 1,
+            "amount": 4000,
+            "duration": 12,
+            "status": "APPLIED"
+        },
+        {
+            "id": 2,
+            "amount": 4000,
+            "duration": 12,
+            "status": "APPLIED"
+        },
+        {
+            "id": 3,
+            "amount": 4000,
+            "duration": 12,
+            "status": "APPLIED"
+        },
+        {
+            "id": 4,
+            "amount": 4000,
+            "duration": 12,
+            "status": "APPLIED"
+        }
+    ]
+}
