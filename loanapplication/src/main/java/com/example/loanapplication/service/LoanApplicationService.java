@@ -9,6 +9,9 @@ import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -24,7 +27,9 @@ import com.example.loanapplication.repository.LoanApplicationRepository;
 public class LoanApplicationService {
 
 	private static final Logger LOGGER = LogManager.getLogger(LoanApplicationService.class);
-	RestTemplate restTemplate = new RestTemplate();
+
+	@Autowired
+	RestTemplate restTemplate;
 
 	@Autowired
 	private LoanApplicationRepository loanApplicationRepository;
@@ -60,6 +65,8 @@ public class LoanApplicationService {
 
 	public Optional<Customer> findCustomer(Integer customerId) {
 		try {
+			restTemplate.exchange(customerServiceURI + customerId, HttpMethod.GET, null, Customer.class);
+
 			return Optional.ofNullable(restTemplate.getForObject(customerServiceURI + customerId, Customer.class));
 		} catch (HttpClientErrorException e) {
 			return Optional.empty();
@@ -77,5 +84,11 @@ public class LoanApplicationService {
 	public LoanApplicationDto convertToDto(LoanApplication loan) {
 		LoanApplicationDto loanApplicationDto = modelMapper.map(loan, LoanApplicationDto.class);
 		return loanApplicationDto;
+	}
+
+	@Bean
+	@LoadBalanced
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 }
