@@ -1,0 +1,33 @@
+server:
+  port: 8082    #port number
+  
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: false
+    lease:
+      duration: 5
+ 
+spring:
+  application:
+    name: loanapplications-service    #service name
+  h2:
+     console:
+       enabled: true
+       path: /h2
+  datasource:
+     url: jdbc:h2:mem:loanapplication;DB_CLOSE_ON_EXIT=FALSE
+     username: sa
+     password:
+ 
+logging:
+  level:
+    com.example.loanapplication.service: DEBUG
+    
+customerprovider:
+   uri: http://customers-service/api/customers/
