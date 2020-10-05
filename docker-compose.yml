@@ -1,0 +1,28 @@
+version: "2.1"
+
+services:
+  customers-service:
+    build: microservices/customers
+    mem_limit: 350m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  loanapplications-service:
+    build: microservices/loanapplication
+    mem_limit: 350m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  eureka:
+    build: spring-cloud/eureka
+    mem_limit: 350m
+    ports:
+      - "8761:8761"
+
+  gateway:
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    build: spring-cloud/gateway
+    mem_limit: 350m
+    ports:
+      - "8080:8080"

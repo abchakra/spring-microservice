@@ -1,0 +1,37 @@
+server:
+  port: 8082 #port number
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 5
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+
+spring:
+  application:
+    name: loanapplications-service #service name
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:loanapplication;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+
+logging:
+  level:
+    com.example.loanapplication.service: DEBUG
+
+customerprovider:
+  uri: http://customers-service/api/customers/
+
+---
+spring.profiles: docker
+
+server.port: 8080
+eureka.client.serviceUrl.defaultZone: http://eureka:8761/eureka/
