@@ -13,7 +13,7 @@ eureka:
 
 spring:
   application:
-    name: customers-service #current service name to be used by the eureka server
+    name: customer-service #current service name to be used by the eureka server
   h2:
     console:
       enabled: true

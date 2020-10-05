@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot microservice with springcloud and kubernetes</description>
 
          <modules>
-		<module>customers</module>
-		<module>loanapplication</module>
+		<module>customer-service</module>
+		<module>loan-application-service</module>
 	</modules>
 </project>         

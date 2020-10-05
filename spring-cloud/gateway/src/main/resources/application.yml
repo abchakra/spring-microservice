@@ -19,13 +19,13 @@ ribbon.ServerListRefreshInterval: 5000
 ribbon.NFLoadBalancerPingInterval: 5
 
 spring.cloud.gateway.routes:
-  - id: customers-service
-    uri: lb://customers-service
+  - id: customer-service
+    uri: lb://customer-service
     predicates:
       - Path=/api/customers/**
 
-  - id: loanapplications-service
-    uri: lb://loanapplications-service
+  - id: loan-application-service
+    uri: lb://loan-application-service
     predicates:
       - Path=/api/loanapplications/**
 

@@ -13,7 +13,7 @@ eureka:
 
 spring:
   application:
-    name: loanapplications-service #service name
+    name: loan-application-service #service name
   h2:
     console:
       enabled: true
@@ -28,7 +28,7 @@ logging:
     com.example.loanapplication.service: DEBUG
 
 customerprovider:
-  uri: http://customers-service/api/customers/
+  uri: http://customer-service/api/customers/
 
 ---
 spring.profiles: docker

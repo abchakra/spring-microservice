@@ -1,14 +1,14 @@
 version: "2.1"
 
 services:
-  customers-service:
-    build: microservices/customers
+  customer-service:
+    build: microservices/customer-service
     mem_limit: 350m
     environment:
       - SPRING_PROFILES_ACTIVE=docker
 
-  loanapplications-service:
-    build: microservices/loanapplication
+  loan-application-service:
+    build: microservices/loan-application-service
     mem_limit: 350m
     environment:
       - SPRING_PROFILES_ACTIVE=docker
