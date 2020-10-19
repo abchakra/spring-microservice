@@ -32,9 +32,9 @@ public class HealthCheckConfiguration {
 	ReactiveHealthIndicator healthcheckMicroservices() {
 
 		ReactiveHealthIndicatorRegistry registry = new DefaultReactiveHealthIndicatorRegistry(new LinkedHashMap<>());
-
-		registry.register("customers-service", () -> getHealth("http://customers-service"));
-		registry.register("loanapplications-service", () -> getHealth("http://loanapplications-service"));
+		registry.register("auth-server",       () -> getHealth("http://auth-server"));
+		registry.register("customer-service", () -> getHealth("http://customer-service"));
+		registry.register("loan-application-service", () -> getHealth("http://loan-application-service"));
 
 		return new CompositeReactiveHealthIndicator(healthAggregator, registry);
 	}
