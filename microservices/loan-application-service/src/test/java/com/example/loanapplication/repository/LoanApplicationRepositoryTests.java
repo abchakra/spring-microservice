@@ -14,12 +14,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.example.loanapplication.model.LoanApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith({ SpringExtension.class })
+@TestPropertySource(value = "classpath:test.properties")
 @SpringBootTest
 public class LoanApplicationRepositoryTests {
 	@Autowired
@@ -42,7 +44,6 @@ public class LoanApplicationRepositoryTests {
 		loanApplicationRepository.deleteAll();
 	}
 
-	
 	@Test
 	@DisplayName("Test LoanApplication found with  existing customer id")
 	public void testLoanApplicationFoundForExistingCustomerId() {
@@ -53,10 +54,10 @@ public class LoanApplicationRepositoryTests {
 				.findLoanApplicationsByCustomerId(11);
 
 		// Then
-		Assertions.assertEquals(retrievedLoanApplications.size(), 2, "Two LoanApplication with CustomerId 11 should exist");
+		Assertions.assertEquals(retrievedLoanApplications.size(), 2,
+				"Two LoanApplication with CustomerId 11 should exist");
 	}
-	
-	
+
 	@Test
 	@DisplayName("Test LoanApplication not found with non-existing customer id")
 	public void testLoanApplicationNotFoundForNonExistingCustomerId() {
@@ -67,7 +68,8 @@ public class LoanApplicationRepositoryTests {
 				.findLoanApplicationsByCustomerId(100);
 
 		// Then
-		Assertions.assertEquals(retrievedLoanApplications.size(), 0, "LoanApplication with CustomerId 100 should not exist");
+		Assertions.assertEquals(retrievedLoanApplications.size(), 0,
+				"LoanApplication with CustomerId 100 should not exist");
 	}
 
 	@Test

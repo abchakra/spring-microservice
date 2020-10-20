@@ -29,9 +29,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.example.customers.model.Customer;
 import com.example.customers.repository.CustomersRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment=RANDOM_PORT, properties = {"eureka.client.enabled=false", "spring.cloud.config.enabled=false"})
 @AutoConfigureMockMvc
 public class CustomersServiceIntegrationTest {
 	@Autowired

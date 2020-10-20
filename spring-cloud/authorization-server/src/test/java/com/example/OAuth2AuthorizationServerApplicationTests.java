@@ -23,7 +23,7 @@ import org.springframework.util.MultiValueMap;
  * @author Josh Cummings
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(properties = { "eureka.client.enabled=false" })
+@SpringBootTest(properties = { "eureka.client.enabled=false", "spring.cloud.config.enabled=false" })
 @AutoConfigureMockMvc
 public class OAuth2AuthorizationServerApplicationTests {
 	private static final String CONTENT_TYPE = "application/json;charset=UTF-8";

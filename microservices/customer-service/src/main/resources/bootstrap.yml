@@ -1,7 +1,7 @@
 app.config-server: localhost
 
 spring:
-  application.name: eureka
+  application.name: customer-service
   cloud.config:
     failFast: true
     retry:
@@ -13,6 +13,6 @@ spring:
     uri: http://${app.config-server}:8888
 
 ---
-
 spring.profiles: docker
+
 app.config-server: config-server

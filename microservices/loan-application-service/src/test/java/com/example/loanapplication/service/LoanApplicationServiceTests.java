@@ -2,11 +2,8 @@ package com.example.loanapplication.service;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -24,12 +21,11 @@ import com.example.loanapplication.model.LoanApplicationsDto;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 
-import wiremock.org.apache.http.HttpResponse;
 import wiremock.org.apache.http.client.ClientProtocolException;
 import wiremock.org.apache.http.impl.client.CloseableHttpClient;
 import wiremock.org.apache.http.impl.client.HttpClients;
 
-@SpringBootTest(webEnvironment = RANDOM_PORT)
+@SpringBootTest
 @TestPropertySource(value = "classpath:test.properties")
 @AutoConfigureWireMock(port = 0)
 public class LoanApplicationServiceTests {

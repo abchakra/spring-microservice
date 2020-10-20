@@ -17,6 +17,7 @@
          <modules>
 		<module>eureka</module>
 		<module>gateway</module>
+		<module>config-server</module>
 		<module>authorization-server</module>
 	</modules>
 </project>         

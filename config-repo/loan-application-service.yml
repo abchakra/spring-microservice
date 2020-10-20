@@ -1,0 +1,31 @@
+server:
+  port: 8082 #port number
+  
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:loanapplication;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+
+
+customerprovider:
+  uri: http://customer-service/api/customers/
+  
+management.endpoint.health.show-details: "ALWAYS"
+management.endpoints.web.exposure.include: "*"
+
+---
+spring.profiles: docker
+
+server.port: 8080

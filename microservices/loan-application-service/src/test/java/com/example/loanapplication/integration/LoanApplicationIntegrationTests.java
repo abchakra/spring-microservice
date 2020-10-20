@@ -1,6 +1,7 @@
 package com.example.loanapplication.integration;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
@@ -25,7 +26,8 @@ import org.springframework.test.web.servlet.ResultActions;
 import com.github.tomakehurst.wiremock.WireMockServer;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = RANDOM_PORT, properties = { "eureka.client.enabled=false",
+		"spring.cloud.config.enabled=false" })
 @AutoConfigureMockMvc
 @TestPropertySource(value = "classpath:test.properties")
 public class LoanApplicationIntegrationTests {
