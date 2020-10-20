@@ -86,9 +86,9 @@ public class LoanApplicationService {
 		return loanApplicationDto;
 	}
 
-	@Bean
-	@LoadBalanced
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+//	@Bean
+////	@LoadBalanced
+//	public RestTemplate restTemplate() {
+//		return new RestTemplate();
+//	}
 }

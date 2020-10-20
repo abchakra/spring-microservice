@@ -36,7 +36,7 @@ public class LoanApplicationIntegrationTests {
 
 	@BeforeEach
 	public void setupWireMockServer() {
-		wireMockServer = new WireMockServer(8081);
+		wireMockServer = new WireMockServer(8080);
 		wireMockServer.start();
 	}
 

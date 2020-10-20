@@ -8,9 +8,8 @@ import org.springframework.web.client.RestTemplate;
 
 //the regular configuration not active with test profile
 @Configuration
-@Profile("!test")
+@Profile("test")
 public class WebConfig {
-	@LoadBalanced
 	@Bean
 	RestTemplate restTemplate() {
 		// you can use your regular rest template here.
