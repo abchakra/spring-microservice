@@ -18,5 +18,6 @@
          <modules>
 		<module>microservices</module>
 		<module>spring-cloud</module>
+		<module>util</module>
 	</modules>
 </project>         

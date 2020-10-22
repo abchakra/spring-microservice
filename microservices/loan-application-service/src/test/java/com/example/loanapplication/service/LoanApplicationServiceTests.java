@@ -22,8 +22,6 @@ import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 
 import wiremock.org.apache.http.client.ClientProtocolException;
-import wiremock.org.apache.http.impl.client.CloseableHttpClient;
-import wiremock.org.apache.http.impl.client.HttpClients;
 
 @SpringBootTest
 @TestPropertySource(value = "classpath:test.properties")
@@ -36,12 +34,11 @@ public class LoanApplicationServiceTests {
 	private WireMockServer wireMockServer;
 	@Autowired
 	private Environment environment;
-	private CloseableHttpClient httpClient = HttpClients.createDefault();
 
 	private static final String PATH_STRING = "api/customers/11";
 
-//	@Autowired
-//	private TestRestTemplate testRestTemplate;
+	// @Autowired
+	// private TestRestTemplate testRestTemplate;
 
 	@Test
 	public void shouldPopulateEnvironmentWithWiremockPort() {
@@ -55,8 +52,8 @@ public class LoanApplicationServiceTests {
 		wireMockServer = new WireMockServer(8080);
 		wireMockServer.start();
 		// configure response stub
-		wireMockServer.stubFor(WireMock.get(WireMock.urlEqualTo(PATH_STRING))
-				.willReturn(aResponse().withStatus(200).withBodyFile("json/customers-response.json")));
+		wireMockServer.stubFor(WireMock.get(WireMock.urlEqualTo(PATH_STRING)).willReturn(
+				aResponse().withStatus(200).withBodyFile("json/customers-response.json")));
 
 	}
 

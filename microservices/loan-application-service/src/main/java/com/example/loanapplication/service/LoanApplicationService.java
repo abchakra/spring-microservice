@@ -1,5 +1,6 @@
 package com.example.loanapplication.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,12 +15,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import com.example.exceptions.InvalidInputException;
+import com.example.exceptions.NotFoundException;
+import com.example.http.HttpErrorInfo;
 import com.example.loanapplication.model.Customer;
 import com.example.loanapplication.model.CustomerDto;
 import com.example.loanapplication.model.LoanApplication;
 import com.example.loanapplication.model.LoanApplicationDto;
 import com.example.loanapplication.model.LoanApplicationsDto;
 import com.example.loanapplication.repository.LoanApplicationRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class LoanApplicationService {
@@ -28,6 +33,8 @@ public class LoanApplicationService {
 
 	@Autowired
 	RestTemplate restTemplate;
+	@Autowired
+	ObjectMapper mapper;
 
 	@Autowired
 	private LoanApplicationRepository loanApplicationRepository;
@@ -44,16 +51,21 @@ public class LoanApplicationService {
 		return loanApplicationRepository.save(loanApplication);
 	}
 
-	public LoanApplicationsDto findCustomerById(Integer id) {
-		LOGGER.info("Finding loans by CustomerId:{}", id);
-		Optional<Customer> customerOpt = findCustomer(id);
+	public LoanApplicationsDto findCustomerById(Integer customerId) {
+		LOGGER.info("Finding loans by CustomerId:{}", customerId);
+
+		if (customerId < 1)
+			throw new InvalidInputException("Invalid productId: " + customerId);
+//		if (customerId == 13)
+//			throw new NotFoundException("No product found for productId: " + customerId);
+		Optional<Customer> customerOpt = findCustomer(customerId);
 		if (customerOpt.isPresent()) {
-			List<LoanApplication> loanApplications = loanApplicationRepository.findLoanApplicationsByCustomerId(id);
+			List<LoanApplication> loanApplications = loanApplicationRepository
+					.findLoanApplicationsByCustomerId(customerId);
 			LoanApplicationsDto responseLoanApplications = convertToDto(loanApplications, customerOpt.get());
 			return responseLoanApplications;
 		}
-
-		return null;
+		throw new NotFoundException("No Customer found for customerId: " + customerId);
 	}
 
 	public LoanApplication findById(Integer id) {
@@ -63,11 +75,26 @@ public class LoanApplicationService {
 
 	public Optional<Customer> findCustomer(Integer customerId) {
 		try {
+			LOGGER.info("Finding Customer by Id:{}", customerId);
 			restTemplate.exchange(customerServiceURI + customerId, HttpMethod.GET, null, Customer.class);
 
 			return Optional.ofNullable(restTemplate.getForObject(customerServiceURI + customerId, Customer.class));
 		} catch (HttpClientErrorException e) {
-			return Optional.empty();
+
+			switch (e.getStatusCode()) {
+
+			case NOT_FOUND:
+				throw new NotFoundException(getErrorMessage(e));
+
+			case UNPROCESSABLE_ENTITY:
+				throw new InvalidInputException(getErrorMessage(e));
+
+			default:
+				LOGGER.warn("Got a unexpected HTTP error: {}, will rethrow it", e.getStatusCode());
+				LOGGER.warn("Error body: {}", e.getResponseBodyAsString());
+				throw e;
+			}
+
 		}
 	}
 
@@ -84,9 +111,12 @@ public class LoanApplicationService {
 		return loanApplicationDto;
 	}
 
-//	@Bean
-////	@LoadBalanced
-//	public RestTemplate restTemplate() {
-//		return new RestTemplate();
-//	}
+	private String getErrorMessage(HttpClientErrorException ex) {
+		try {
+			return mapper.readValue(ex.getResponseBodyAsString(), HttpErrorInfo.class).getMessage();
+		} catch (IOException ioex) {
+			return ex.getMessage();
+		}
+	}
+
 }

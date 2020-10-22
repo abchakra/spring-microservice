@@ -109,28 +109,6 @@
 					</layers>
 				</configuration>
 			</plugin>
-			<!-- <plugin> -->
-			<!-- <groupId>com.google.cloud.tools</groupId> -->
-			<!-- <artifactId>jib-maven-plugin</artifactId> -->
-			<!-- <version>2.5.2</version> -->
-			<!-- <configuration> -->
-			<!-- openjdk:11.0.5-jre -->
-			<!-- <from> -->
-			<!-- <image>openjdk:11.0.5-jre</image> -->
-			<!-- </from> -->
-			<!-- <to> -->
-			<!-- <credHelper>pass</credHelper> -->
-			<!-- <image>docker.io/chakraborty/${project.artifactId}</image> -->
-			<!-- <tags> -->
-			<!-- <tag>${project.version}</tag> -->
-			<!-- </tags> -->
-			<!-- <auth> -->
-			<!-- <username>chakraborty</username> -->
-			<!-- <password>ADD-DOCKER-PASSWORD</password> -->
-			<!-- </auth> -->
-			<!-- </to> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
 		</plugins>
 	</build>
 

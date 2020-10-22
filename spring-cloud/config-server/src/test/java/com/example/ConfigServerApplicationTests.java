@@ -30,9 +30,9 @@ class ConfigServerApplicationTests {
 				.getForEntity("http://localhost:" + port + "/application/default", Environment.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 //		assertThat(entity.getBody().getPropertySources().isEmpty()).isFalse();
-//		assertThat(entity.getBody().getPropertySources().get(0)).isNotNull();
-//		assertThat(entity.getBody().getPropertySources().get(0).getSource().get("app.auth-server"))
-//				.isEqualTo("localhost");
+		// assertThat(entity.getBody().getPropertySources().get(0)).isNotNull();
+		// assertThat(entity.getBody().getPropertySources().get(0).getSource().get("app.auth-server"))
+		// .isEqualTo("localhost");
 	}
 
 	@Test
@@ -40,6 +40,6 @@ class ConfigServerApplicationTests {
 		ResponseEntity<Environment> entity = restTemplate
 				.getForEntity("http://localhost:" + port + "/application/customer-service", Environment.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-//		assertThat(entity.getBody().getPropertySources().isEmpty()).isFalse();
+		// assertThat(entity.getBody().getPropertySources().isEmpty()).isFalse();
 	}
 }

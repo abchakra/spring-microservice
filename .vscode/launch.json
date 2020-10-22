@@ -1,0 +1,15 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-ConfigServerApplication<config-server>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.example.ConfigServerApplication",
+      "projectName": "config-server",
+      "args": "",
+      "vmArgs": "-Dspring.profiles.active=native,local"
+    }
+  ]
+}
